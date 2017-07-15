@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<title>VR TEST</title>
+
+		<meta name='viewport' content='width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0'>
+
+		<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Zilla+Slab'>
+		<link rel='stylesheet' href='./muilessium-0.1.26.min.css'>
+
+		<style>
+
+			html {
+				font-family: 'Zilla Slab', serif;
+			}
+			
+			body {
+				overflow: hidden;
+			}
+
+			.fake-cursor:before,
+			.fake-cursor:after {
+				content: '';
+				position: fixed;
+				z-index: 2;
+				top: 50%;
+				height: 16px;
+				width: 16px;
+				border-radius: 50%;
+				border: 2px dotted #000;
+				transform: translateX(-50%) translateY(1px);
+			}
+
+			.fake-cursor:before {
+				left: 25%;
+			}
+
+			.fake-cursor:after {
+				left: 75%;
+			}
+
+			.fake-cursor.-active:before,
+			.fake-cursor.-active:after {
+				background: #FFF;
+				border: solid 3px #000;
+			}
+
+			.vr-area {
+				height: 120vh;
+				width: 100%;
+				padding: 1rem;
+				border: 10px solid #000;
+
+				background-image:
+					linear-gradient(0deg,
+						#FCFCFC 0%,
+						#FCFCFC 5%,
+						transparent 5%,
+						transparent 95%,
+						#FCFCFC 95%,
+						#FCFCFC 100%),
+					linear-gradient(90deg,
+						#FCFCFC 0%,
+						#FCFCFC 5%,
+						transparent 5%,
+						transparent 95%,
+						#FCFCFC 95%,
+						#FCFCFC 100%);
+				background-position: center center;
+				background-size: 40px 40px;
+			}
+
+			.vr-area.-center {
+				background-color: #FFC691;
+			}
+
+			.vr-area.-left {
+				background-color: #B4EDDA;
+			}
+
+			.vr-area.-right {
+				background-color: #FF7A7C;
+			}
+
+			.vr-area.-left,
+			.vr-area.-right {
+				width: 50%;
+			}
+
+			.mui-button.-separated + .mui-button.-separated {
+				margin-left: 2rem;
+			}
+
+			/* --- */
+
+			.-f-blue-3-bg.-focused {
+				background: #2967A0 !important;
+			}
+
+			.-f-orange-3-bg.-focused {
+				background: #F86624 !important;
+			}
+
+			.-f-red-3-bg.-focused {
+				background: #E2181C !important;
+			}
+
+		</style>
+	</head>
+	<body>
+
+		<div class='vr-area -left'>
+			<div class='mui-card'>
+				<div class='header -white -black-bg'>Left</div>
+				<div class='content -white-bg'>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua.</p>
+					<div class='mui-row _separate-1'>
+						<div class='mui-column _text-center'>
+							<div class='mui-button-group'>
+								<a class='mui-button -icon -f-blue-3-bg' aria-label=''>
+									<span>∗1</span>
+								</a>
+								<a class='mui-button -icon -f-blue-3-bg' aria-label=''>
+									<span>∗2</span>
+								</a>
+								<a class='mui-button -icon -f-blue-3-bg' aria-label=''>
+									<span>∗3</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class='vr-area -center'>
+			<div class='mui-card'>
+				<div class='header -white -black-bg'>Center</div>
+				<div class='content -white-bg'>
+					<div class='mui-row'>
+						<div class='mui-column _text-center'>
+							<a class='mui-button -separated -badge-on-top -f-orange-3-bg' aria-label=''>
+								<span>One</span>
+								<span class='mui-badge' aria-label='5 messages total'>1337</span>
+							</a>
+							<a class='mui-button -separated -badge-on-top -f-orange-3-bg' aria-label=''>
+								<span>Two</span>
+								<span class='mui-badge' aria-label='5 messages total'>14</span>
+							</a>
+							<a class='mui-button -separated -badge-on-top -f-orange-3-bg' aria-label=''>
+								<span>12345</span>
+								<span class='mui-badge' aria-label='5 messages total'>08</span>
+							</a>
+						</div>
+					</div>
+					<p class='_separate-1'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat.</p>
+					<ul class='mui-accordion _separate-1'>
+						<li class='item'>
+							<div class='title -f-white -f-orange-3-bg'>
+								<div class='indicator'>
+									<span>→</span>
+								</div>
+								<span>Lorem</span>
+							</div>
+							<div class='content'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, quaerat!</div>
+						</li>
+						<li class='item'>
+							<div class='title -f-white -f-orange-3-bg'>
+								<div class='indicator'>
+									<span>→</span>
+								</div>
+								<span>Lorem</span>
+							</div>
+							<div class='content'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, quaerat!</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<div class='vr-area -right'>
+			<div class='mui-card'>
+				<div class='header -white -black-bg'>Right</div>
+				<div class='content -white-bg'>
+					 <div class='mui-input-wrapper'>
+						<label class='mui-input-label'>Select color</label>
+						<div class='mui-select-dropdown'>
+							<div class='select' data-id='fGrt3'>
+							<div class='state'></div>
+							<div class='mui-dropdown-options _shadow-1'>
+									<div class='option -selected' data-value='red'>Red</div>
+									<div class='option' data-value='green'>Green</div>
+									<div class='option' data-value='blue'>Blue</div>
+									<div class='option' data-value='orange'>Orange</div>
+								</div>
+							</div>
+							<div class='mui-shadow-toggle'></div>
+							<div class='icon'>
+								<span>↓</span>
+							</div>
+						</div>
+					</div>
+					<p class='_separate-1'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<div class='mui-row _separate-1'>
+						<div class='mui-column _text-center'>
+							<button class='mui-button -f-red-3-bg'>Ok</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class='fake-cursor _allow-empty'></div>
+
+		<script src='./muilessium-0.1.26.min.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/86/three.min.js'></script>
+		<script src='./CSS3DStereoRenderer.js'></script>
+		<script src='./DeviceOrientationController.js'></script>
+		
+		<script>
+			var scene    = null,
+				camera   = null,
+				renderer = null,
+				controls = null;
+
+			init();
+			render();
+			animate();
+
+			function init() {
+				initScene();
+				initRenderer();
+				initCamera();
+				initControls();
+				initAreas();
+				initCursor();
+				initEvents();
+			}
+
+			function initScene() {
+				scene = new THREE.Scene();
+			}
+
+			function initRenderer() {
+				renderer = new THREE.CSS3DStereoRenderer();
+				renderer.setSize(window.innerWidth, window.innerHeight);
+				renderer.domElement.style.position = 'absolute';
+				renderer.domElement.style.top = 0;
+				renderer.domElement.style.background = '#343335';
+				document.body.appendChild(renderer.domElement);
+			}
+
+			function initCamera() {
+				camera = new THREE.PerspectiveCamera(45,
+						window.innerWidth/window.innerHeight, 1, 1000);
+				camera.position.z = 1000;
+				scene.add(camera);
+			}
+
+			function initControls() {
+				controls = new DeviceOrientationController(camera, renderer.domElement);
+				controls.connect();
+
+				controls.addEventListener('userinteractionstart', function () {
+					renderer.domElement.style.cursor = 'move';
+				});
+
+				controls.addEventListener('userinteractionend', function () {
+					renderer.domElement.style.cursor = 'default';
+				});
+			}
+
+			function initAreas() {
+				var width = window.innerWidth / 2;
+
+				initArea('.vr-area.-left',   [-width/2 -width/5.64,0,width/5.64], [0,Math.PI/4,0]);
+				initArea('.vr-area.-center', [0,0,0], [0,0,0]);
+				initArea('.vr-area.-right',  [width/2 + width/5.64,0,width/5.64], [0,-Math.PI/4,0]);
+			}
+
+			function initArea(contentSelector, position, rotation) {
+				var element = document.querySelector(contentSelector),
+					area = new THREE.CSS3DObject(element);
+
+				area.position.x = position[0];
+				area.position.y = position[1];
+				area.position.z = position[2];
+
+				area.rotation.x = rotation[0];
+				area.rotation.y = rotation[1];
+				area.rotation.z = rotation[2];
+
+				scene.add(area);
+			}
+
+
+			function initCursor() {
+				var x1 = window.innerWidth * 0.25,
+					x2 = window.innerWidth * 0.75,
+					y = window.innerHeight * 0.50,
+					element1 = document.body,
+					element2 = document.body,
+					cursor = document.querySelector('.fake-cursor');
+
+				setInterval(function() {
+					if (element1 && element1.classList) {
+						element1.classList.remove('-focused');
+					}
+
+					if (element2  && element2.classList) {
+						element2.classList.remove('-focused');
+					}
+
+					element1 = document.elementFromPoint(x1, y);
+					element2 = document.elementFromPoint(x2, y);
+
+					if (element1 && element2) {
+						while (element1.tabIndex < 0 && element1.parentNode) {
+							element1 = element1.parentNode;
+						}
+
+						while (element2.tabIndex < 0 && element2.parentNode) {
+							element2 = element2.parentNode;
+						}
+
+						if (element1.tabIndex >= 0) {	
+							element1.classList.add('-focused');
+						}
+
+						if (element2.tabIndex >= 0) {
+							element2.classList.add('-focused');
+						}
+					}
+				}, 100);
+
+				document.addEventListener('keydown', function(event) {
+					if (event.keyCode === 13) {
+						if (element1 && element2) {
+							element1.click();
+							element2.click();
+
+							cursor.classList.add('-active');
+
+							setTimeout(function() {
+								cursor.classList.remove('-active');
+							}, 100);
+						}
+					}
+				});
+			}
+
+			function initEvents() {
+				window.addEventListener('resize', onWindowResize);
+			}
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				render();
+			}
+
+			function animate() {
+				controls.update();
+				render();
+				requestAnimationFrame(animate);
+			}
+
+			function render() {
+				renderer.render(scene, camera);
+			}
+		</script>
+	</body>
+</html>
